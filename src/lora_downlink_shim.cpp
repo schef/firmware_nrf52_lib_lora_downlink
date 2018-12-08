@@ -19,7 +19,7 @@
 #endif
 
 /* self */
-#include "shim.h"
+#include "lora_downlink_shim.h"
 
 /* Private typedef ---------------------------------------------------------- */
 
