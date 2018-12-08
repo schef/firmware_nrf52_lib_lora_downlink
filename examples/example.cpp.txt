@@ -1,21 +1,36 @@
 main.cpp:
 
-...
+void main (int argv, char* argv[])
+{
+    ...
+
     /* setup of BLE wrapper */
     BleWrapper::getInstance();
     AppTimer::getInstance()->registerCallback(BleWrapper::staticTimerCallback, 100, "BleWrapper");
     BleWrapper::getInstance()->start();
 
+    /* initialize LoRa manager */
+    LoraProcessor::init();
+    LoraProcessor::configureDevice();
+    LoraManager::init();
+    MainThread::getInstance()->registerCallback(LoraManager::timerCallback, 1000, "LoraManager");
+
+    /* optional - enable UART debug printing */
+    UART_DebugPrintSet(true);
+
+
     /* setup of commands and LoRa downlink bridge for commands*/
     CommandParserServer::getInstance()->registerCommand(DEVICE_TYPE, 0x00, 0, exampleCommand, NULL);
-    LoraDownlink_Init(true, false); /* strict command indexing, do not use mock methods - use real command parser */
 
-    /* initiate LoRa as you do */
-
-    UART_DebugPrintSet(true); /* for easier input - see demo code */
+    /* strict command indexing, do not use mock methods - use real command parser */
+    LoraDownlink_Init(true, false);
 
 
-On successful LoRa uplink (UART rx: mac_rx_(pl) )
+    ...
+}
+
+On successful LoRa uplink (UART rx: mac_rx [PAYLOAD]) if the payload matches the proper format,
+it will be passed on to exampleCommand()
 
 void exampleCommand(uint16_t connHandle, uint8_t *pStream, uint8_t streamLen,
                          uint8_t *pCmdParams, uint8_t pCmdParamLen,
