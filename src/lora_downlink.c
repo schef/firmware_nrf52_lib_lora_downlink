@@ -178,9 +178,9 @@ void LoraDownlink_Init(bool bIdxRule, bool bTestMode)
     }
     else
     {
-        FnPtrs.reset = Shim_CommandParserWriteReset;
-        FnPtrs.command = Shim_CommandParserWriteCommand;
-        FnPtrs.stream = Shim_CommandParserWriteStream;
+        FnPtrs.reset = LDS_CommandParserWriteReset;
+        FnPtrs.command = LDS_CommandParserWriteCommand;
+        FnPtrs.stream = LDS_CommandParserWriteStream;
     }
 
     LoRa_Received_registerCallback(LoraDownlink_Handler);

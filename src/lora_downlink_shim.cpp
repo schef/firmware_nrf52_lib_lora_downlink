@@ -32,14 +32,14 @@
 /* Private functions -------------------------------------------------------- */
 
 /* Public functions --------------------------------------------------------- */
-void Shim_CommandParserWriteReset(uint16_t connHandle)
+void LDS_CommandParserWriteReset(uint16_t connHandle)
 {
     #ifdef _command_parser_server_hpp
     CommandParserServer::getInstance()->writeReset(connHandle);
     #endif
 }
 
-void Shim_CommandParserWriteCommand(uint16_t connHandle, uint8_t commandGroup,
+void LDS_CommandParserWriteCommand(uint16_t connHandle, uint8_t commandGroup,
                                     uint8_t commandAction, uint8_t *pCommandParams,
                                     uint8_t commandParamsSize)
 {
@@ -49,7 +49,7 @@ void Shim_CommandParserWriteCommand(uint16_t connHandle, uint8_t commandGroup,
     #endif
 }
 
-void Shim_CommandParserWriteStream(uint16_t connHandle, uint8_t *pStream,
+void LDS_CommandParserWriteStream(uint16_t connHandle, uint8_t *pStream,
                                    uint8_t len)
 {
     #ifdef _command_parser_server_hpp

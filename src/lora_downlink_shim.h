@@ -22,13 +22,13 @@ extern "C" {
 #include <stdint.h>
 
 /* Public functions --------------------------------------------------------- */
-void Shim_CommandParserWriteReset(uint16_t connHandle);
+void LDS_CommandParserWriteReset(uint16_t connHandle);
 
-void Shim_CommandParserWriteCommand(uint16_t connHandle, uint8_t commandGroup,
+void LDS_CommandParserWriteCommand(uint16_t connHandle, uint8_t commandGroup,
                                     uint8_t commandAction, uint8_t *pCommandParams,
                                     uint8_t commandParamsSize);
 
-void Shim_CommandParserWriteStream(uint16_t connHandle, uint8_t *pStream,
+void LDS_CommandParserWriteStream(uint16_t connHandle, uint8_t *pStream,
                                    uint8_t len);
 
 #ifdef __cplusplus
