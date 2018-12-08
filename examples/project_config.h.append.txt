@@ -8,6 +8,6 @@
 
 ...
 
-#define FILE_NAME_LORA_PROCESSOR       BG TBC "loraProcessor"          RST
+#define FILE_NAME_LORA_DOWNLINK        BG TBC "loraDownlink"           RST
 
 ...
