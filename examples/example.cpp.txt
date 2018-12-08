@@ -1,0 +1,45 @@
+main.cpp:
+
+void main (int argv, char* argv[])
+{
+    ...
+
+    /* setup of BLE wrapper */
+    BleWrapper::getInstance();
+    AppTimer::getInstance()->registerCallback(BleWrapper::staticTimerCallback, 100, "BleWrapper");
+    BleWrapper::getInstance()->start();
+
+    /* initialize LoRa manager */
+    LoraProcessor::init();
+    LoraProcessor::configureDevice();
+    LoraManager::init();
+    MainThread::getInstance()->registerCallback(LoraManager::timerCallback, 1000, "LoraManager");
+
+    /* optional - enable UART debug printing */
+    UART_DebugPrintSet(true);
+
+
+    /* setup of commands and LoRa downlink bridge for commands*/
+    CommandParserServer::getInstance()->registerCommand(DEVICE_TYPE, 0x00, 0, exampleCommand, NULL);
+
+    /* strict command indexing, do not use mock methods - use real command parser */
+    LoraDownlink_Init(true, false);
+
+
+    ...
+}
+
+On successful LoRa uplink (UART rx: mac_rx [PAYLOAD]) if the payload matches the proper format,
+it will be passed on to exampleCommand()
+
+void exampleCommand(uint16_t connHandle, uint8_t *pStream, uint8_t streamLen,
+                         uint8_t *pCmdParams, uint8_t pCmdParamLen,
+                         uint32_t writeIndex)
+{
+    /* handle as if any other command, or... */
+
+    if (connHandle == NRF_SDH_BLE_TOTAL_LINK_COUNT)
+    {
+        /* command came from LoRa uplink, handle specially */
+    }
+}

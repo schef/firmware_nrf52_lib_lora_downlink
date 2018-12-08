@@ -1,0 +1,13 @@
+#ifndef _PROJECT_CONFIG_H
+#define _PROJECT_CONFIG_H
+
+...
+
+#define DEVICE_EXAMPLE 0x80
+#define DEVICE_TYPE DEVICE_EXAMPLE /* used by downlink to set default command group */
+
+...
+
+#define FILE_NAME_LORA_PROCESSOR       BG TBC "loraProcessor"          RST
+
+...
